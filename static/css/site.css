@@ -1,0 +1,325 @@
+body {
+    margin: 0;
+    background: #f5f5f5;
+    color: #222;
+    font: 15px Arial;
+}
+
+a {
+    color: green;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.topbar {
+    padding: 15px 4%;
+    background: white;
+    border-bottom: 1px solid #ccc;
+}
+
+.brand {
+    color: #222;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.nav-button {
+    border: none;
+    background: none;
+    color: green;
+    cursor: pointer;
+}
+
+.page-wrap {
+    width: 92%;
+    margin: 25px auto;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 19px;
+}
+
+.eyebrow {
+    color: green;
+    font-size: 12px;
+}
+
+.muted,
+.help-text {
+    color: #777;
+}
+
+.page-heading {
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 8px 12px;
+    border: 1px solid #aaa;
+    background: white;
+    cursor: pointer;
+}
+
+.button.primary {
+    background: green;
+    color: white;
+}
+
+.button.danger {
+    background: red;
+    color: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.stat-card,
+.panel {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.stat-card strong {
+    font-size: 25px;
+}
+
+.welcome-panel {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.filter-panel {
+    margin-bottom: 15px;
+    padding: 12px;
+    background: white;
+    border: 1px solid #ccc;
+}
+
+.filter-field,
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.search-field {
+    width: 60%;
+}
+
+input,
+select,
+textarea {
+    padding: 8px;
+    border: 1px solid #aaa;
+    font: inherit;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #eee;
+}
+
+.product-name,
+.sku {
+    display: block;
+}
+
+.sku,
+.small-text {
+    color: #777;
+    font-size: 12px;
+}
+
+.actions {
+    display: flex;
+    gap: 5px;
+}
+
+.badge,
+.low-stock {
+    padding: 3px 6px;
+    background: #ddd;
+    font-size: 12px;
+}
+
+.badge.active {
+    background: #d5ead8;
+    color: green;
+}
+
+.low-stock {
+    background: #ffe5a8;
+}
+
+.empty-state,
+.login-card {
+    padding: 25px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.empty-state {
+    text-align: center;
+}
+
+.pagination {
+    margin-top: 15px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-row.wide {
+    grid-column: 1 / -1;
+}
+
+.checkbox-row {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-row input {
+    width: auto;
+}
+
+.required,
+.field-error,
+.form-errors,
+.delete-link {
+    color: red;
+}
+
+.form-actions {
+    margin-top: 15px;
+}
+
+.notice {
+    padding: 10px;
+    background: #fff0c0;
+}
+
+.detail-panel {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    background: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+
+.detail-image,
+.image-placeholder {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    background: #ddd;
+}
+
+.detail-info dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.detail-info dt {
+    color: #777;
+    font-size: 12px;
+}
+
+.detail-info dd {
+    margin: 3px 0;
+}
+
+.confirm-panel {
+    width: 550px;
+}
+
+.login-wrap {
+    margin-top: 50px;
+}
+
+.login-card {
+    width: 400px;
+    margin: auto;
+}
+
+.login-card form {
+    display: grid;
+    gap: 10px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #dff0df;
+}
+
+/* Basic mobile support */
+@media (max-width: 700px) {
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-info dl {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        display: block;
+    }
+
+    .nav-links a,
+    .nav-button {
+        margin-right: 10px;
+    }
+}

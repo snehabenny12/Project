@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if product %}
+        Edit Product
+    {% else %}
+        Add Product
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<h1>
+    {% if product %}
+        Edit Product
+    {% else %}
+        Add Product
+    {% endif %}
+</h1>
+
+<p>Enter product details.</p>
+
+<form method="post" enctype="multipart/form-data" class="panel">
+
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div class="form-errors">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+
+
+    <div class="form-grid">
+
+        {% for field in form %}
+
+            <div class="form-row">
+
+                {% if field.name != "is_active" %}
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+
+                        {% if field.field.required %}
+                            <span class="required">*</span>
+                        {% endif %}
+                    </label>
+
+                {% endif %}
+
+
+                {{ field }}
+
+
+                {% if field.name == "is_active" %}
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                {% endif %}
+
+
+                {% for error in field.errors %}
+
+                    <small class="field-error">
+                        {{ error }}
+                    </small>
+
+                {% endfor %}
+
+
+                {% if field.help_text %}
+
+                    <small class="help-text">
+                        {{ field.help_text }}
+                    </small>
+
+                {% endif %}
+
+
+                {% if field.name == "image" and product.image %}
+
+                    <small>
+                        Current image:
+                        <a href="{{ product.image.url }}">
+                            {{ product.image.name }}
+                        </a>
+                    </small>
+
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% if not form.fields.category.queryset.exists %}
+
+        <p class="notice">
+            No categories are available.
+
+            <a href="{% url 'admin:catalog_category_add' %}">
+                Add category from admin
+            </a>
+        </p>
+
+    {% endif %}
+
+
+    <div class="form-actions">
+
+        <a href="{% url 'product_list' %}" class="button">
+            Cancel
+        </a>
+
+        <button type="submit" class="button primary">
+            Save Product
+        </button>
+
+    </div>
+
+</form>
+
+{% endblock %}

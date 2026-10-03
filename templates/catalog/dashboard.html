@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | Store Admin
+{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+
+    <div>
+        <h1>Dashboard</h1>
+        <p>Store inventory details</p>
+    </div>
+
+    <a href="{% url 'product_create' %}" class="button primary">
+        Add Product
+    </a>
+
+</div>
+
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <span>Total Products</span>
+        <strong>{{ total_products }}</strong>
+    </div>
+
+    <div class="stat-card">
+        <span>Active Products</span>
+        <strong>{{ active_products }}</strong>
+    </div>
+
+    <div class="stat-card">
+        <span>Inactive Products</span>
+        <strong>{{ inactive_products }}</strong>
+    </div>
+
+    <div class="stat-card">
+        <span>Low Stock</span>
+        <strong>{{ low_stock_products }}</strong>
+    </div>
+
+</div>
+
+
+<div class="welcome-panel">
+
+    <div>
+        <h2>Manage Products</h2>
+        <p>View and update your store products.</p>
+    </div>
+
+    <a href="{% url 'product_list' %}" class="button">
+        View Products
+    </a>
+
+</div>
+
+{% endblock %}

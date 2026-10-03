@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Delete {{ product.name }} | Store Admin{% endblock %}
+
+{% block content %}
+<div class="panel confirm-panel">
+    <h1>Delete Product</h1>
+    <p>Are you sure you want to delete <strong>{{ product.name }}</strong> ({{ product.sku }})?</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <a class="button" href="{% url 'product_list' %}">Cancel</a>
+            <button type="submit" class="button danger">Delete Product</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

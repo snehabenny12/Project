@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}
+Products | Store Admin
+{% endblock %}
+
+{% block content %}
+
+<h1>Products</h1>
+
+<p>
+    {{ page_obj.paginator.count }} product{{ page_obj.paginator.count|pluralize }}
+</p>
+
+<a href="{% url 'product_create' %}" class="button primary">
+    Add Product
+</a>
+
+
+<form method="get" class="filter-panel">
+
+    <div class="filter-field">
+        <label for="q">Search</label>
+        <input
+            id="q"
+            type="search"
+            name="q"
+            value="{{ query }}"
+            placeholder="Name or SKU"
+        >
+    </div>
+
+
+    <div class="filter-field">
+
+        <label for="category">Category</label>
+
+        <select id="category" name="category">
+
+            <option value="">All categories</option>
+
+            {% for category in categories %}
+
+                <option value="{{ category.id }}"
+                    {% if selected_category == category.id|stringformat:"s" %}
+                        selected
+                    {% endif %}
+                >
+                    {{ category.name }}
+                </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+
+    <div class="filter-field">
+
+        <label for="status">Status</label>
+
+        <select id="status" name="status">
+
+            <option value="">All statuses</option>
+
+            <option value="active"
+                {% if selected_status == "active" %}
+                    selected
+                {% endif %}
+            >
+                Active
+            </option>
+
+            <option value="inactive"
+                {% if selected_status == "inactive" %}
+                    selected
+                {% endif %}
+            >
+                Inactive
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <button type="submit" class="button">
+        Filter
+    </button>
+
+
+    {% if query or selected_category or selected_status %}
+
+        <a href="{% url 'product_list' %}">
+            Clear
+        </a>
+
+    {% endif %}
+
+</form>
+
+
+<div class="panel">
+
+    {% if page_obj.object_list %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for product in page_obj %}
+
+                    <tr>
+
+                        <td>
+
+                            <span class="product-name">
+                                {{ product.name }}
+                            </span>
+
+                            <span class="sku">
+                                {{ product.sku }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+                            {{ product.category.name }}
+                        </td>
+
+
+                        <td>
+                            ₹{{ product.price|floatformat:2 }}
+                        </td>
+
+
+                        <td>
+
+                            {{ product.stock }}
+
+                            {% if product.is_low_stock %}
+
+                                <span class="low-stock">
+                                    Low stock
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if product.is_active %}
+
+                                <span class="badge active">
+                                    Active
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge">
+                                    Inactive
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <a href="{% url 'product_edit' product.pk %}">
+                                Edit
+                            </a>
+
+                            <a href="{% url 'product_delete' product.pk %}">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+
+    {% else %}
+
+        <div class="empty-state">
+
+            <h2>No products found</h2>
+
+            <p>
+                Try changing the filters or add a new product.
+            </p>
+
+            <a href="{% url 'product_create' %}" class="button primary">
+                Add Product
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+{% if page_obj.paginator.num_pages > 1 %}
+
+    <div class="pagination">
+
+        <span>
+            Page {{ page_obj.number }}
+            of
+            {{ page_obj.paginator.num_pages }}
+        </span>
+
+
+        <div>
+
+            {% if page_obj.has_previous %}
+
+                <a
+                    class="button"
+                    href="?page={{ page_obj.previous_page_number }}&amp;q={{ query|urlencode }}&amp;category={{ selected_category|urlencode }}&amp;status={{ selected_status|urlencode }}"
+                >
+                    Previous
+                </a>
+
+            {% endif %}
+
+
+            {% if page_obj.has_next %}
+
+                <a
+                    class="button"
+                    href="?page={{ page_obj.next_page_number }}&amp;q={{ query|urlencode }}&amp;category={{ selected_category|urlencode }}&amp;status={{ selected_status|urlencode }}"
+                >
+                    Next
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}
