@@ -4,7 +4,6 @@ __pycache__/
 db.sqlite3
 media/
 .env
-README.md
 templates/README.txt
 .DS_Store
 Thumbs.db
